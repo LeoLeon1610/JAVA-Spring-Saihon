@@ -13,8 +13,8 @@ import com.saihon.Spring.model.Usuario;
 public class UsuariosController {
 	
 	
-	@GetMapping
-	public List<Usuario> getUsuarios(){
-		return
-	}
+//	@GetMapping
+//	public List<Usuario> getUsuarios(){
+//		return
+//	}
 }
