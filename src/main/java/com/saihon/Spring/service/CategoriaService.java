@@ -3,11 +3,12 @@ package com.saihon.Spring.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.saihon.Spring.model.Categoria;
 
 
-
+@Service
 public class CategoriaService {
 	public final ArrayList<Categoria> lista = new ArrayList<Categoria>();
 
