@@ -34,5 +34,9 @@ public class PedidoService {
 		return tPedido;
 	}//getPedido
 	
+	public Pedido deletePedido (int id) {
+		Pedido tPedido = null
+	}
+	
 	
 }//class PedidoService
