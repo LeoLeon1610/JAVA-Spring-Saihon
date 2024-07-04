@@ -18,7 +18,7 @@ import com.saihon.Spring.model.Categoria;
 import com.saihon.Spring.service.CategoriaService;
 
 @RestController
-@RequestMapping(path="/api/productos/")
+@RequestMapping(path="/api/categorias/")
 public class CategoriaController {
 	private final CategoriaService categoriaService;
 	
@@ -33,14 +33,14 @@ public class CategoriaController {
 			return categoriaService.getAllCategoria();
 		}//get
 		
-		@GetMapping(path="{prodId}") //http://localhost:8080/api/productos/1
-		public Categoria getCategoria(@PathVariable("prodId") int id ) {
+		@GetMapping(path="{categoriaId}") //http://localhost:8080/api/productos/1
+		public Categoria getCategoria(@PathVariable("categoriaId") int id ) {
 			return categoriaService.getCategoria(id);
 		}//get
 		
 		//delete
-		@DeleteMapping(path="{prodId}") //http://localhost:8080/api/productos/1
-		public Categoria deleteCategoria(@PathVariable("prodId")int id) {
+		@DeleteMapping(path="{categoriaId}") //http://localhost:8080/api/productos/1
+		public Categoria deleteCategoria(@PathVariable("categoriaId")int id) {
 			return categoriaService.deleteCategoria(id);
 		}//delete
 		
@@ -51,8 +51,8 @@ public class CategoriaController {
 		}//add
 		
 		//put
-		@PutMapping(path="{prodId}") //http://localhost:8080/api/productos/1
-		public Categoria updateCategoria(@PathVariable("prodId")int id,
+		@PutMapping(path="{categoriaId}") //http://localhost:8080/api/productos/1
+		public Categoria updateCategoria(@PathVariable("categoriaId")int id,
 				@RequestParam(required=false) String nombre) {
 			return categoriaService.updateCategoria(id, nombre);
 		}//updateProducto

@@ -14,10 +14,10 @@ public class CategoriaService {
 
 	@Autowired
 	public CategoriaService() {
-		lista.add(new Categoria(1, "Terror"));
-		lista.add(new Categoria(2, "Romance"));
-		lista.add(new Categoria(3, "Suspenso"));
-		lista.add(new Categoria(4, "Drama"));
+		lista.add(new Categoria("Terror"));
+		lista.add(new Categoria("Romance"));
+		lista.add(new Categoria("Suspenso"));
+		lista.add(new Categoria("Drama"));
 	}// constructor
 
 	
@@ -51,8 +51,8 @@ public class CategoriaService {
 	public Categoria addCategoria(Categoria categoria) {
 		Categoria tmpProd=null;
 		boolean existe=false;
-		for (Categoria prod : lista) {
-			if(prod.getNombre().equals(categoria.getNombre())) {
+		for (Categoria categ : lista) {
+			if(categ.getNombre().equals(categoria.getNombre())) {
 				existe = true;
 				break;
 			}// if
