@@ -47,7 +47,11 @@ public class LibroPedidoController {
 
     // Actualizar un libro pedido
     @PutMapping(path = "{libroPedidoId}")
-    public LibroPedido updateLibroPedido(@PathVariable("libroPedidoId") int id, @RequestParam(required = false) Integer idLibro, @RequestParam(required = false) Integer idPedido) {
+    public LibroPedido updateLibroPedido(
+        @PathVariable("libroPedidoId") int id, 
+        @RequestParam(required = false) Integer idLibro, 
+        @RequestParam(required = false) Integer idPedido){
+            
         return libroPedidoService.updateLibroPedido(id, idLibro, idPedido);
     }
 }

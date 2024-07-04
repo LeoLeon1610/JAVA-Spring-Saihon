@@ -3,7 +3,6 @@ package com.saihon.Spring.service;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
-
 import com.saihon.Spring.model.LibroPedido;
 
 @Service
@@ -59,19 +58,18 @@ public class LibroPedidoService {
             return tmpLibroPedido;
     }
 
-    public LibroPedido updateLibroPedido(int id, int idLibro, int idPedido) {
-        LibroPedido tmpLibroPedido=null;
-        for (LibroPedido libroPedido : table){
-            if(libroPedido.getId() == id){
-
-                libroPedido.setIdLibro(idLibro);
-                libroPedido.setIdPedido(idPedido);
-                tmpLibroPedido=libroPedido;
-                break;
+    public LibroPedido updateLibroPedido(Integer id, Integer idLibro, Integer idPedido) {
+            LibroPedido tmpLibroPedido=null;
+            for (LibroPedido libroPedido : table){
+                if(libroPedido.getId() == id){
+        
+                    if(idLibro != null)libroPedido.setIdLibro(idLibro);
+                    if(idPedido != null)libroPedido.setIdPedido(idPedido);
+                    tmpLibroPedido=libroPedido;
+                    break;
+                }
             }
             return tmpLibroPedido;
         }
-        return null;
     }
 
-}
