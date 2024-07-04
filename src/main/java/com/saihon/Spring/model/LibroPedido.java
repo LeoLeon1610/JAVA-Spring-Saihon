@@ -5,7 +5,7 @@ public class LibroPedido {
     private int id;
     private int idLibro;
     private int idPedido;
-    
+                  
 
     public LibroPedido(int idLibro, int idPedido) {
         idLibroPedido++;
