@@ -22,12 +22,14 @@ public class LibroPedidoService {
     }
 
     public LibroPedido getLibroPedidoById(int id) {
+        LibroPedido tmLibroPedido=null;
         for(LibroPedido libroPedido : table){
             if(libroPedido.getId() == id){
-                return libroPedido;
+                tmLibroPedido = libroPedido;
+                break;
             }
         }
-        return null;
+        return tmLibroPedido;
     }
 
     public LibroPedido deleteLibroPedido(int id) {

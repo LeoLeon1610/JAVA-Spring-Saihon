@@ -3,15 +3,7 @@ package com.saihon.Spring.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam; // Add this import statement
+import org.springframework.web.bind.annotation.*;
 
 import com.saihon.Spring.model.LibroPedido;
 import com.saihon.Spring.service.LibroPedidoService;
@@ -20,43 +12,43 @@ import com.saihon.Spring.service.LibroPedidoService;
 @RequestMapping("api/libropedido")
 public class LibroPedidoController {
     private final LibroPedidoService libroPedidoService;
-    
-    //Constructor
+
+    // Constructor
     @Autowired
-    public LibroPedidoController (LibroPedidoService libroPedidoService) {
+    public LibroPedidoController(LibroPedidoService libroPedidoService) {
         this.libroPedidoService = libroPedidoService;
     }
 
-    //Métodos
+    // Métodos
 
-    //Dar la lista de pedidos
+    // Dar la lista de pedidos
     @GetMapping
-    public ArrayList<LibroPedido> getLibroPedido(){
+    public ArrayList<LibroPedido> getLibroPedido() {
         return libroPedidoService.getAllLibroPedido();
     }
 
-    //Dar la lista de libros Pedidos por id
-    @GetMapping(path = "{LibroPedidoId}")
-    public LibroPedido getLibroPedidoById(@PathVariable("LibroPedidoId") int id){
+    // Dar la lista de libros pedidos por id
+    @GetMapping(path = "{libroPedidoId}")
+    public LibroPedido getLibroPedidoById(@PathVariable("libroPedidoId") int id) {
         return libroPedidoService.getLibroPedidoById(id);
-        
     }
 
     // Eliminar un libro pedido por id
-    @DeleteMapping(path = "{LibroPedidoId}")
-    public LibroPedido deleteLibroPedido(@PathVariable("LibroPedidoId") int id){
+    @DeleteMapping(path = "{libroPedidoId}")
+    public LibroPedido deleteLibroPedido(@PathVariable("libroPedidoId") int id) {
         return libroPedidoService.deleteLibroPedido(id);
     }
 
     // Crear un libro pedido
     @PostMapping
-    public LibroPedido createLibroPedido(@RequestBody LibroPedido libroPedido){
+    public LibroPedido createLibroPedido(@RequestBody LibroPedido libroPedido) {
         return libroPedidoService.addLibroPedido(libroPedido);
     }
 
     // Actualizar un libro pedido
-    @PutMapping
-    public LibroPedido updateLibroPedido(@PathVariable("LibroPedidoId") int id, @RequestParam(required = false) int idLibro, @RequestParam(required = false) int idPedido ){
-        return libroPedidoService.updateLibroPedido(id, idLibro, idPedido); 
+    @PutMapping(path = "{libroPedidoId}")
+    public LibroPedido updateLibroPedido(@PathVariable("libroPedidoId") int id, @RequestParam(required = false) Integer idLibro, @RequestParam(required = false) Integer idPedido) {
+        return libroPedidoService.updateLibroPedido(id, idLibro, idPedido);
     }
 }
+
