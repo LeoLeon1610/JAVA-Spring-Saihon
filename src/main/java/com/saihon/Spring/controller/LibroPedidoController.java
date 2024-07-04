@@ -37,14 +37,14 @@ public class LibroPedidoController {
 
     //Dar la lista de libros Pedidos por id
     @GetMapping(path = "{LibroPedidoId}")
-    public LibroPedido getLibroPedidoById(@PathVariable("LibroPedidoId") Long id){
+    public LibroPedido getLibroPedidoById(@PathVariable("LibroPedidoId") int id){
         return libroPedidoService.getLibroPedidoById(id);
         
     }
 
     // Eliminar un libro pedido por id
     @DeleteMapping(path = "{LibroPedidoId}")
-    public LibroPedido deleteLibroPedido(@PathVariable("LibroPedidoId") Long id){
+    public LibroPedido deleteLibroPedido(@PathVariable("LibroPedidoId") int id){
         return libroPedidoService.deleteLibroPedido(id);
     }
 
@@ -56,7 +56,7 @@ public class LibroPedidoController {
 
     // Actualizar un libro pedido
     @PutMapping
-    public LibroPedido updateLibroPedido(@PathVariable("LibroPedidoId") Long id, @RequestParam(required = false) Long idLibro, @RequestParam(required = false) Long idPedido ){
+    public LibroPedido updateLibroPedido(@PathVariable("LibroPedidoId") int id, @RequestParam(required = false) int idLibro, @RequestParam(required = false) int idPedido ){
         return libroPedidoService.updateLibroPedido(id, idLibro, idPedido); 
     }
 }

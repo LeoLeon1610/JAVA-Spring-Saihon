@@ -6,29 +6,66 @@ import com.saihon.Spring.model.LibroPedido;
 
 public class LibroPedidoService {
 
+    public final ArrayList<LibroPedido> table = new ArrayList<LibroPedido>();
+
+    public LibroPedidoService(){
+        table.add(new LibroPedido(1, 1));
+        table.add(new LibroPedido(2, 2));
+        table.add(new LibroPedido(3, 3));
+    }
+
     public ArrayList<LibroPedido> getAllLibroPedido() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllLibroPedido'");
+        return table;
     }
 
-    public LibroPedido getLibroPedidoById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getLibroPedidoById'");
+    public LibroPedido getLibroPedidoById(int id) {
+        for(LibroPedido libroPedido : table){
+            if(libroPedido.getId() == id){
+                return libroPedido;
+            }
+        }
+        return null;
     }
 
-    public LibroPedido deleteLibroPedido(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteLibroPedido'");
+    public LibroPedido deleteLibroPedido(int id) {
+        for(LibroPedido libroPedido : table){
+            if(libroPedido.getId() == id){
+                table.remove(libroPedido);
+                return libroPedido;
+            }
+        }
+        return null;
     }
 
-    public LibroPedido addLibroPedido(LibroPedido libroPedido) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addLibroPedido'");
+    public LibroPedido addLibroPedido(LibroPedido nuevolibroPedido) {
+            LibroPedido tmpLibroPedido=null;
+            boolean existe=false;
+            for (LibroPedido pedido : table) {
+                if(pedido.getIdPedido() == nuevolibroPedido.getIdPedido() && pedido.getIdLibro() == nuevolibroPedido.getIdLibro()){
+                    existe = true;
+                    break;
+                }
+            }
+            if(! existe) {
+                table.add(nuevolibroPedido);
+                tmpLibroPedido=nuevolibroPedido;
+            }
+            return tmpLibroPedido;
     }
 
-    public LibroPedido updateLibroPedido(Long id, Long idLibro, Long idPedido) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateLibroPedido'");
+    public LibroPedido updateLibroPedido(int id, int idLibro, int idPedido) {
+        LibroPedido tmpLibroPedido=null;
+        for (LibroPedido libroPedido : table){
+            if(libroPedido.getId() == id){
+
+                libroPedido.setIdLibro(idLibro);
+                libroPedido.setIdPedido(idPedido);
+                tmpLibroPedido=libroPedido;
+                break;
+            }
+            return tmpLibroPedido;
+        }
+        return null;
     }
 
 }

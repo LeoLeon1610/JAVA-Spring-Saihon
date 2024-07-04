@@ -1,34 +1,34 @@
 package com.saihon.Spring.model;
 
 public class LibroPedido {
-    private Long id;
-    private Long idLibro;
-    private Long idPedido;
+    private int id;
+    private int idLibro;
+    private int idPedido;
 
-    public LibroPedido(Long idLibro, Long idPedido){
+    public LibroPedido(int idLibro, int idPedido) {
         this.idLibro = idLibro;
         this.idPedido = idPedido;
     }
 
 
     // Getters y Setters
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public Long getIdLibro() {
+    public int getIdLibro() {
         return idLibro;
     }
 
-    public void setIdLibro(Long idLibro) {
+    public void setIdLibro(int idLibro) {
         this.idLibro = idLibro;
     }
 
-    public Long getIdPedido() {
+    public int getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(Long idPedido) {
+    public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 
