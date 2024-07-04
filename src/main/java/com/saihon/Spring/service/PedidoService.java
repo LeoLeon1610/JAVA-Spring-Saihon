@@ -49,7 +49,8 @@ public class PedidoService {
 		Pedido tPedido = null;
 		boolean existe = false;
 		for(Pedido prod : lista) {
-			if(prod.getIdPedidos().equals(pedido.getIdPedidos())) {
+			//if(prod.getIdPedidos().equals(pedido.getIdPedidos())) {
+				if (prod.getIdPedidos() == pedido.getIdPedidos()) {
 				existe = true;
 				break;
 			}//if
@@ -60,6 +61,19 @@ public class PedidoService {
 		}//if ! existe
 		return tPedido;
 	}//addPedido
+
+	public Pedido updatePedido(int idPedidos, String domicilio, String pago, int idUsuario) {
+		Pedido tPedido = null;
+		for (Pedido pedido : lista) {
+			if(pedido.getIdPedidos()==idPedidos) {
+				if(domicilio!=null)pedido.setDomicilio(domicilio);
+				if(pago!=null)pedido.setPago(pago);
+				tPedido = pedido;
+				break;
+			}//if
+		}//forEach
+		return tPedido;
+	}//updatePedido
 	
 	
 }//class PedidoService
