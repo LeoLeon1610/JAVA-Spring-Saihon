@@ -4,7 +4,7 @@ public class Pedido {
     private String domicilio;
     private String pago;
     private int idPedidos;
-    private int idUsuario;
+    private Integer idUsuario;
     private static int total = 0;
 
     public Pedido(String domicilio, String pago, int idUsuario) {
@@ -17,6 +17,8 @@ public class Pedido {
 
     // Constructor vacío
     public Pedido() {
+    	Pedido.total++;
+        this.idPedidos = total;
     }
 
     public String getDomicilio() {
@@ -39,7 +41,7 @@ public class Pedido {
         return idPedidos;
     }
 
-    public int getIdUsuario() {
+    public Integer getIdUsuario() {
         return idUsuario;
     }
 

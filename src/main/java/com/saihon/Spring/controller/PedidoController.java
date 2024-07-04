@@ -42,7 +42,7 @@ public class PedidoController {
     public Pedido updatePedido(@PathVariable("prodId") int idPedidos,
                                @RequestParam(required = false) String domicilio,
                                @RequestParam(required = false) String pago,
-                               @RequestParam(required = false) int idUsuario) {
+                               @RequestParam(required = false) Integer idUsuario) {
         return pedidoService.updatePedido(idPedidos, domicilio, pago);
     }
 }
