@@ -46,14 +46,15 @@ public class LibroPedidoService {
             LibroPedido tmpLibroPedido=null;
             boolean existe=false;
             for (LibroPedido pedido : table) {
-                if(pedido.getIdPedido() == nuevolibroPedido.getIdPedido() && pedido.getIdLibro() == nuevolibroPedido.getIdLibro()){
+                if(pedido.getIdPedido() == nuevolibroPedido.getIdPedido()){
                     existe = true;
                     break;
                 }
             }
-            if(! existe) {
-                table.add(nuevolibroPedido);
+            if(!existe) {
                 tmpLibroPedido=nuevolibroPedido;
+                table.add(tmpLibroPedido);
+                return tmpLibroPedido;
             }
             return tmpLibroPedido;
     }

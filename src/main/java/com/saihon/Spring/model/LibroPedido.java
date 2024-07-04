@@ -1,12 +1,15 @@
 package com.saihon.Spring.model;
 
 public class LibroPedido {
-    private static int idLibroPedido;
+    private static int idLibroPedido = 0;
+    private int id;
     private int idLibro;
     private int idPedido;
+    
 
     public LibroPedido(int idLibro, int idPedido) {
         idLibroPedido++;
+        this.id = idLibroPedido;
         this.idLibro = idLibro;
         this.idPedido = idPedido;
     }
@@ -14,7 +17,7 @@ public class LibroPedido {
 
     // Getters y Setters
     public int getId() {
-        return idLibroPedido;
+        return id;
     }
 
     public int getIdLibro() {
