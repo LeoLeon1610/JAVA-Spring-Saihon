@@ -3,10 +3,15 @@ package com.saihon.Spring.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam; // Add this import statement
 
 import com.saihon.Spring.model.LibroPedido;
 import com.saihon.Spring.service.LibroPedidoService;
@@ -46,13 +51,12 @@ public class LibroPedidoController {
     // Crear un libro pedido
     @PostMapping
     public LibroPedido createLibroPedido(@RequestBody LibroPedido libroPedido){
-        return libroPedidoService.createLibroPedido(libroPedido);
+        return libroPedidoService.addLibroPedido(libroPedido);
     }
 
     // Actualizar un libro pedido
     @PutMapping
-    public LibroPedido updateLibroPedido(@RequestBody LibroPedido libroPedido){
-        return libroPedidoService.updateLibroPedido(libroPedido);
+    public LibroPedido updateLibroPedido(@PathVariable("LibroPedidoId") Long id, @RequestParam(required = false) Long idLibro, @RequestParam(required = false) Long idPedido ){
+        return libroPedidoService.updateLibroPedido(id, idLibro, idPedido); 
     }
-
 }
