@@ -1,19 +1,21 @@
 package com.saihon.Spring.model;
 
 public class Categoria {
-
+	private static int total =0;
 	private int id;
 	private String nombre;
 	
 	
-	public Categoria(int id, String nombre) {
-		this.id = id;
+	public Categoria(String nombre) {
+		Categoria.total++;
+		this.id = total;
 		this.nombre = nombre;
 	}//constructor
 
 
 	public Categoria() {
-		
+		Categoria.total++;
+		this.id = total;
 	}//constructorVacio
 
 
