@@ -2,8 +2,11 @@ package com.saihon.Spring.service;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.saihon.Spring.model.LibroPedido;
 
+@Service
 public class LibroPedidoService {
 
     public final ArrayList<LibroPedido> table = new ArrayList<LibroPedido>();
