@@ -23,10 +23,10 @@ public class PedidoService {
 		return lista;
 	}//getAllPorducts
 	
-	public Pedido getPedido(int id) {
+	public Pedido getPedido(int idPedidos) {
 		Pedido tPedido= null;
 		for (Pedido pedido: lista) {
-			if(pedido.getIdPedidos()==id) {
+			if(pedido.getIdPedidos()==idPedidos) {
 				tPedido = pedido;
 				break;
 			}//if
@@ -34,9 +34,36 @@ public class PedidoService {
 		return tPedido;
 	}//getPedido
 	
-	public Pedido deletePedido (int id) {
-		Pedido tPedido = null
-	}
+	public Pedido deletePedido(int idPedidos) {
+		Pedido tPedido = null;
+		for (Pedido pedido : lista) {
+			if (pedido.getIdPedidos()==idPedidos) {
+				tPedido = lista.remove(lista.indexOf(pedido));
+				break;
+			}//if
+		}//forEach
+		return tPedido;
+	}//deletePedido
+	
+	public Pedido addPedido(Pedido pedido) {
+		Pedido tPedido = null;
+		boolean existe = false;
+		for(Pedido prod : lista) {
+			if(prod.getIdPedidos().equals(pedido.getIdPedidos())) {
+				existe = true;
+				break;
+			}//if
+		}//forEach
+		if(! existe) {
+			lista.add(pedido);
+			tPedido=pedido;
+		}//if ! existe
+		return tPedido;
+	}//addPedido
+	
+	
+	
+	
 	
 	
 }//class PedidoService
