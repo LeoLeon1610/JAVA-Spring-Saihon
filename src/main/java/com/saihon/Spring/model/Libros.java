@@ -4,26 +4,36 @@ public class Libros {
 	private String nombreLibro;
 	private Double precio;
 	private String descripcion;
-	private int cantidad_Stock;
+	private Integer cantidadStock;
 	private String portada;
 	private String autor;
-	private String categoría;
+	private Integer year;
+	private String categoria;
 	private int idLibros;
 	private static int total=0;
 	
-	public Libros(int idLibros, String nombreLibro, Double precio, String descripcion, int cantidad_Stock,
-			String portada, String autor, String categoría) {
 
+	public Libros(String nombreLibro, Double precio, String descripcion, Integer cantidadStock, String portada,
+			String autor, Integer year, String categoria) {
 		this.nombreLibro = nombreLibro;
 		this.precio = precio;
 		this.descripcion = descripcion;
-		this.cantidad_Stock = cantidad_Stock;
+		this.cantidadStock = cantidadStock;
 		this.portada = portada;
 		this.autor = autor;
-		this.categoría = categoría;
+		this.year = year;
+		this.categoria = categoria;
 		Libros.total++;
 		this.idLibros=total;
-	} //Constructor
+	}
+
+	public Integer getYear() {
+		return year;
+	} //getYear
+
+	public void setYear(Integer year) {
+		this.year = year;
+	} //setYear
 
 	public Libros() {
 		Libros.total++;
@@ -54,12 +64,12 @@ public class Libros {
 		this.descripcion = descripcion;
 	} //setDescripcion
 
-	public int getCantidad_Stock() {
-		return cantidad_Stock;
+	public Integer getCantidadStock() {
+		return cantidadStock;
 	} //getCantidad_Stock
 
-	public void setCantidad_Stock(int cantidad_Stock) {
-		this.cantidad_Stock = cantidad_Stock;
+	public void setCantidadStock(Integer cantidadStock) {
+		this.cantidadStock = cantidadStock;
 	} //setCantidad_Stock
 
 	public String getPortada() {
@@ -78,12 +88,12 @@ public class Libros {
 		this.autor = autor;
 	} //setAutor
 
-	public String getCategoría() {
-		return categoría;
+	public String getCategoria() {
+		return categoria;
 	} //getCategoria
 
-	public void setCategoría(String categoría) {
-		this.categoría = categoría;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	} //setCategoria
 	
 	public int getId() {
@@ -93,9 +103,11 @@ public class Libros {
 	@Override
 	public String toString() {
 		return "Libros [nombreLibro=" + nombreLibro + ", precio=" + precio + ", descripcion=" + descripcion
-				+ ", cantidad_Stock=" + cantidad_Stock + ", portada=" + portada + ", autor=" + autor + ", categoría="
-				+ categoría + ", idLibros=" + idLibros + "]";
+				+ ", cantidadStock=" + cantidadStock + ", portada=" + portada + ", autor=" + autor + ", year=" + year
+				+ ", categoria=" + categoria + ", idLibros=" + idLibros + "]";
 	}
+
+
 
 
 } //CLASS LIBROS
