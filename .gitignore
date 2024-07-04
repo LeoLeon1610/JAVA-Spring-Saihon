@@ -8,6 +8,7 @@ build/
 # Gradle files
 .gradle/
 build/
+build.gradle
 
 ### STS ###
 .apt_generated
