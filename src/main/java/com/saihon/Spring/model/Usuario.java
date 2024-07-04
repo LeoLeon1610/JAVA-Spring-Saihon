@@ -5,20 +5,20 @@ public class Usuario {
 	private String nombre;
 	private String password;
 	private int id;
-	public static int total=0;
+	private static int total=0;
+
+	public Usuario(String email, String nombre, String password) {
+		this.email = email;
+		this.nombre = nombre;
+		this.password = password;
+		Usuario.total++;
+		this.id = total;
+	}// Constructor
 	
 	public Usuario() {
 		Usuario.total++;
 		this.id=total;
 	}//Constructor Vacío
-
-	public Usuario(String email, String nombre, String password, int id) {
-		this.email = email;
-		this.nombre = nombre;
-		this.password = password;
-		Usuario.total++;
-		this.id = id;
-	}// Constructor
 
 	public String getEmail() {
 		return email;
