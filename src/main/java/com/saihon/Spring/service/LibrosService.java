@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.saihon.Spring.model.Libros;
 
 @Service
@@ -46,8 +45,19 @@ public class LibrosService {
 	}
 	
 	public Libros addLibro(Libros libros){
-		listaLibros.add(libros);
-		return libros;
+		Libros tmpBook = null;
+		boolean existe=false;
+		for (Libros libro : listaLibros) {
+			if(libro.getNombreLibro().equals(libros.getNombreLibro())) {
+				existe = true;
+				break;
+			}// if
+		}//foreach
+		if(! existe) {
+			listaLibros.add(libros);
+			tmpBook=libros;
+		}// if ! existe
+		return tmpBook;
 	}
 
 	public Libros updateBooks(String nombreLibro, Double precio, String descripcion, Integer cantidadStock, String portada,
