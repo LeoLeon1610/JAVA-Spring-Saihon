@@ -63,11 +63,22 @@ public class UsuarioService {
 				usuarioRepository.save(tmpUser);
 			} else {
 				System.out.println("updateUser- El password del usuario ["
-						+ id +" No coincide]");
+						+ id +"] No coincide");
 				tmpUser=null;
 			}
 		}
 		return tmpUser;
 	}//PUT User
+	
+	public boolean validateUser(Usuario usuario) {
+		Optional <Usuario> userByEmail = usuarioRepository.findByEmail(usuario.getEmail());
+		if(userByEmail.isPresent()) {
+			Usuario tmpUser=userByEmail.get();
+			if(encoder.matches(usuario.getPassword(), tmpUser.getPassword())) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }
