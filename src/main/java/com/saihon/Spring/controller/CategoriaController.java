@@ -1,7 +1,7 @@
 package com.saihon.Spring.controller;
 
-import java.util.ArrayList;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,18 +29,18 @@ public class CategoriaController {
 		}// constructor
 		
 		@GetMapping
-		public ArrayList<Categoria> getCategoria(){
+		public List<Categoria> getCategoria(){
 			return categoriaService.getAllCategoria();
 		}//get
 		
 		@GetMapping(path="{categoriaId}") //http://localhost:8080/api/productos/1
-		public Categoria getCategoria(@PathVariable("categoriaId") int id ) {
+		public Categoria getCategoria(@PathVariable("categoriaId") Long id ) {
 			return categoriaService.getCategoria(id);
 		}//get
 		
 		//delete
 		@DeleteMapping(path="{categoriaId}") //http://localhost:8080/api/productos/1
-		public Categoria deleteCategoria(@PathVariable("categoriaId")int id) {
+		public Categoria deleteCategoria(@PathVariable("categoriaId")Long id) {
 			return categoriaService.deleteCategoria(id);
 		}//delete
 		
@@ -52,7 +52,7 @@ public class CategoriaController {
 		
 		//put
 		@PutMapping(path="{categoriaId}") //http://localhost:8080/api/productos/1
-		public Categoria updateCategoria(@PathVariable("categoriaId")int id,
+		public Categoria updateCategoria(@PathVariable("categoriaId")Long id,
 				@RequestParam(required=false) String nombre) {
 			return categoriaService.updateCategoria(id, nombre);
 		}//updateProducto
