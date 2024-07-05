@@ -1,25 +1,36 @@
 package com.saihon.Spring.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+//POJO - Plain Old Java Object
+
+@Entity
+@Table (name="categoria")
 public class Categoria {
-	private static int total =0;
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false)
+	private long id;
+	@Column(nullable=false)
 	private String nombre;
 	
 	
+	
 	public Categoria(String nombre) {
-		Categoria.total++;
-		this.id = total;
 		this.nombre = nombre;
 	}//constructor
 
 
 	public Categoria() {
-		Categoria.total++;
-		this.id = total;
 	}//constructorVacio
 
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -38,8 +49,5 @@ public class Categoria {
 	}
 	
 	//getter and setter
-	
-	
-	
 	
 } //class
