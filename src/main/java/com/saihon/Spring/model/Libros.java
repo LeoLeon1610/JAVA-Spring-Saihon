@@ -1,6 +1,21 @@
 package com.saihon.Spring.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Libros")
 public class Libros {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", unique=true, nullable=false)
+	private Long idLibros;
+	
+	@Column(nullable=false)
 	private String nombreLibro;
 	private Double precio;
 	private String descripcion;
@@ -9,12 +24,11 @@ public class Libros {
 	private String autor;
 	private Integer year;
 	private String categoria;
-	private int idLibros;
-	private static int total=0;
-	
 
-	public Libros(String nombreLibro, Double precio, String descripcion, Integer cantidadStock, String portada,
-			String autor, Integer year, String categoria) {
+	
+	public Libros(Long idLibros, String nombreLibro, Double precio, String descripcion, Integer cantidadStock,
+			String portada, String autor, Integer year, String categoria) {
+		this.idLibros = idLibros;
 		this.nombreLibro = nombreLibro;
 		this.precio = precio;
 		this.descripcion = descripcion;
@@ -23,9 +37,12 @@ public class Libros {
 		this.autor = autor;
 		this.year = year;
 		this.categoria = categoria;
-		Libros.total++;
-		this.idLibros=total;
-	}
+	}//Constructor
+	
+	
+	public Libros() {
+
+	} //constructor vacio
 
 	public Integer getYear() {
 		return year;
@@ -34,11 +51,6 @@ public class Libros {
 	public void setYear(Integer year) {
 		this.year = year;
 	} //setYear
-
-	public Libros() {
-		Libros.total++;
-		this.idLibros=total;
-	} //Constructor Vacío
 
 	public String getNombreLibro() {
 		return nombreLibro;
@@ -96,7 +108,7 @@ public class Libros {
 		this.categoria = categoria;
 	} //setCategoria
 	
-	public int getId() {
+	public Long getId() {
 		return idLibros;
 	} //getId
 

@@ -1,6 +1,7 @@
 package com.saihon.Spring.controller;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +18,7 @@ import com.saihon.Spring.model.Libros;
 import com.saihon.Spring.service.LibrosService;
 
 @RestController
-@RequestMapping(path="/api/libros")
+@RequestMapping(path="/api/libros/")
 public class LibrosController {
 	private final LibrosService libroService;
 	@Autowired
@@ -26,27 +27,27 @@ public class LibrosController {
 	}//constructor
 	
 	@GetMapping
-	public ArrayList<Libros> getLibros(){
+	public List<Libros> getLibros(){
 		return libroService.getAllBooks();
 	}//getLibros
 	
 	@GetMapping(path="{libroID}")// http://localhost:8080/api/productos/1
-	public Libros getLibro(@PathVariable("libroID") int id){
-		return libroService.getLibro(id);
+	public Libros getLibro(@PathVariable("libroID") Long id){
+		return libroService.getBook(id);
 	}//getLibro
 	
 	@DeleteMapping(path="{libroID}") // http://localhost:8080/api/productos/1
-	public Libros deleteLibro(@PathVariable("libroID") int id) {
-		return libroService.deleteLibro(id);
+	public Libros deleteLibro(@PathVariable("libroID") Long id) {
+		return libroService.deleteBook(id);
 	}//deleteLibro
 	
 	@PostMapping // http://localhost:8080/api/productos/
 	public Libros addLibro(@RequestBody Libros libro) {
-		return libroService.addLibro(libro);
+		return libroService.addBook(libro);
 	}//addBook
 	
 	@PutMapping(path="{libroID}") // http://localhost:8080/api/productos/1
-	public Libros updateLibro(@PathVariable("libroID")int idLibros,
+	public Libros updateLibro(@PathVariable("libroID") Long idLibros,
 		@RequestParam(required=false) String nombreLibro,
 		@RequestParam(required=false) Double precio,
 		@RequestParam(required=false) String descripcion,
@@ -56,7 +57,7 @@ public class LibrosController {
 		@RequestParam(required=false) Integer year,
 		@RequestParam(required=false) String categoria) {
 		
-		return libroService.updateBooks(nombreLibro, precio, descripcion, cantidadStock, portada,
+		return libroService.updateBook(nombreLibro, precio, descripcion, cantidadStock, portada,
 				autor, year, categoria, idLibros);
 	}//updateLibro
 }//LibrosController
