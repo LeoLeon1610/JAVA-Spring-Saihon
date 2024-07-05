@@ -1,86 +1,72 @@
 package com.saihon.Spring.service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.saihon.Spring.dto.ChangePassword;
 import com.saihon.Spring.model.Usuario;
+import com.saihon.Spring.repository.UsuariosRepository;
 
 @Service
 public class UsuarioService {
-	public final ArrayList<Usuario> lista = new ArrayList<Usuario>();
+	private final UsuariosRepository usuarioRepository;
 	
 	@Autowired
-	public UsuarioService() {
-		Usuario usuario1 = new Usuario("Braulio Israel", "bralioiac@gmail.com", "Abc123@!");
-		Usuario usuario2 = new Usuario("Leonardo León", "leonardol20@gmail.com", "Abc123@!");
-		Usuario usuario3 = new Usuario("Andrea Castellanos", "andrea_cas@gmail.com", "Abc123@!");
-		lista.add(usuario1);
-		lista.add(usuario2);
-		lista.add(usuario3);
+	private PasswordEncoder encoder;
+	
+	@Autowired
+	public UsuarioService(UsuariosRepository usuarioRepository) {
+		this.usuarioRepository = usuarioRepository;
 	}
 	
-	public ArrayList<Usuario> getUsers() {
-		return lista;
+	public List<Usuario> getUsers() {
+		return usuarioRepository.findAll();
 	}//GET Users
 	
-	public Usuario getUser(int id) {
-		Usuario tmpUser = null;
-		for (Usuario u : lista) {
-			if(u.getId() == id) {
-				tmpUser = u;
-				break;
-			}
-		}
-		return tmpUser;
+	public Usuario getUser(Long id) {
+		return usuarioRepository.findById(id).orElseThrow(()->new IllegalArgumentException("El usuario con el id ["
+				+ id +"] no existe"));
 	}//GET User
 	
-	public Usuario removeUser(int id) {
+	public Usuario removeUser(Long id) {
 		Usuario tmpUser = null;
-		for (Usuario usuario : lista) {
-			if(usuario.getId()==id) {
-				tmpUser=lista.remove(lista.indexOf(usuario));
-				break;
-			}
-		}
+		if(usuarioRepository.existsById(id)) {
+			tmpUser=usuarioRepository.findById(id).get(); // El get lo saca del Optional
+			usuarioRepository.deleteById(id);
+		};
 		return tmpUser;
 	}//DELETE User
 	
 	public Usuario addUser(Usuario newUser) {
-		boolean existe=false;
-		for (Usuario usuario : lista) {
-			if(usuario.getEmail().equals(newUser.getEmail())) {
-				existe=true;
-				break;
-			}
-		}
-		if(! existe) {
-			lista.add(newUser);
-			return newUser;
+		Optional<Usuario> tmpUser = 
+				usuarioRepository.findByEmail(newUser.getEmail());
+		if (tmpUser.isEmpty()) {
+			newUser.setPassword(encoder.encode(newUser.getPassword()));
+			return usuarioRepository.save(newUser);
 		} else {
+			System.out.println("El usuario con el nombre ["
+					+ newUser.getEmail() + "] ya existe");
 			return null;
 		}
 	}//POST User
 	
-	public Usuario updateUser(ChangePassword changePassword,int id) {
+	public Usuario updateUser(ChangePassword changePassword,Long id) {
 		Usuario tmpUser = null;
-		for (Usuario usuario : lista) {
-			if(usuario.getId()==id) {
-				if(changePassword.getPassword().equals(usuario.getPassword())) {
-					usuario.setPassword(changePassword.getNpassword());
-					tmpUser=usuario;
-					
-				} else {
-					System.out.println("updateUser- El password del usuario ["
-							+ id +" No coincide]");
-					tmpUser=null;
-				}
-				break;
+		if(usuarioRepository.existsById(id)) {
+			tmpUser = usuarioRepository.findById(id).get();
+			if(encoder.matches(changePassword.getPassword() , tmpUser.getPassword())) {
+				tmpUser.setPassword(encoder.encode(changePassword.getNpassword()));
+				usuarioRepository.save(tmpUser);
+			} else {
+				System.out.println("updateUser- El password del usuario ["
+						+ id +" No coincide]");
+				tmpUser=null;
 			}
 		}
-		
 		return tmpUser;
 	}//PUT User
 	
