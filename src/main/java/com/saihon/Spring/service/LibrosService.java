@@ -1,70 +1,58 @@
 package com.saihon.Spring.service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.saihon.Spring.model.Libros;
+import com.saihon.Spring.repository.LibrosRepository;
 
 @Service
 public class LibrosService {
-	public final ArrayList<Libros> listaLibros = new ArrayList<Libros>();
+	public final LibrosRepository librosRepository;
 
 	@Autowired
-	public LibrosService(){
-		listaLibros.add(new Libros("To kill A Mockingbird", 200.50, "A classic novel depicting racial injustice in the American South", 12, "Monckingbird.jpg","Harper Lee", 1960, "Classic"));
-		listaLibros.add(new Libros("1984", 200.50, "A dystopian novel portraying a totalitarian society ", 4, "1984.jpg","George Orwell", 1949,  "Classic"));
-		listaLibros.add(new Libros("Pride and Prejudice", 200.50, "A classic novel exploring themes of love, marriage, and social norms", 11, "Pride.jpg","Jane Austen", 1813, "Romance"));
+	public LibrosService(LibrosRepository librosRepository){
+		this.librosRepository = librosRepository;
 	}
 	
-	public ArrayList<Libros> getAllBooks(){
-		return listaLibros;
+	public List<Libros> getAllBooks(){
+		return librosRepository.findAll();
+	}//getAllBooks
+	
+	public Libros getBook(Long id) {
+		return librosRepository.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("El libro con el id ["+ id + "] no existe"));
 	}
 	
-	public Libros getLibro(int id) {
+	public Libros deleteBook(Long id) {
 		Libros tmpBook = null;
-		for (Libros libros : listaLibros) {
-			if(libros.getId()==id) {
-				tmpBook=libros;
-				break;
-			}//if
-		}//foreach
+		if (librosRepository.existsById(id)) {
+			tmpBook=librosRepository.findById(id).get();
+			librosRepository.deleteById(id);
+		}//if
 		return tmpBook;
-	}
+	}//delete
 	
-	public Libros deleteLibro(int id) {
-		Libros tmpBook = null;
-		for (Libros libros : listaLibros) {
-			if(libros.getId()==id) {
-				tmpBook=libros;
-				listaLibros.remove(listaLibros.indexOf(tmpBook));
-				break;
-			} //if
-		}//foreach
-		return tmpBook;
-	}
-	
-	public Libros addLibro(Libros libros){
-		Libros tmpBook = null;
-		boolean existe=false;
-		for (Libros libro : listaLibros) {
-			if(libro.getNombreLibro().equals(libros.getNombreLibro())) {
-				existe = true;
-				break;
-			}// if
-		}//foreach
-		if(! existe) {
-			listaLibros.add(libros);
-			tmpBook=libros;
-		}// if ! existe
-		return tmpBook;
-	}
 
-	public Libros updateBooks(String nombreLibro, Double precio, String descripcion, Integer cantidadStock, String portada,
-			String autor, Integer year, String categoria, int idLibros) {
+    public Libros addBook(Libros libros) {
+        Optional<Libros> tmpLibro = librosRepository.findByNombreLibro(libros.getNombreLibro());
+        
+        if(tmpLibro.isEmpty()) {
+        	return librosRepository.save(libros);
+        } else {
+        	System.out.println("El libros con el nombre [" +
+        			libros.getNombreLibro() + "] ya existe");
+        	return null;
+        }
+    }//addProduct
+
+	public Libros updateBook(String nombreLibro, Double precio, String descripcion, Integer cantidadStock, String portada,
+			String autor, Integer year, String categoria, Long idLibros) {
 		Libros tmpBook = null;
-		for (Libros libros : listaLibros) {
-			if(libros.getId()==idLibros) {
+		if (librosRepository.existsById(idLibros)){
+			Libros libros =librosRepository.findById(idLibros).get();
 				if(nombreLibro != null) libros.setNombreLibro(nombreLibro);
 				if(precio != null) libros.setPrecio(precio);
 				if(descripcion != null) libros.setDescripcion(descripcion);
@@ -73,11 +61,11 @@ public class LibrosService {
 				if(autor != null) libros.setAutor(autor);
 				if(year != null) libros.setYear(year);
 				if(categoria != null) libros.setCategoria(categoria);
+				librosRepository.save(libros);
+				tmpBook=libros;
 			}//if 
-		}//foreach
-		
 		return tmpBook;
-	}
+	}//updateLibro
 
 } // class LibroService
 
