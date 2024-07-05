@@ -13,6 +13,7 @@ import com.saihon.Spring.service.PedidoService;
 @RequestMapping(path="/api/pedidos/")
 public class PedidoController {
     private final PedidoService pedidoService;
+;
 
     @Autowired
     public PedidoController(PedidoService pedidoService) {
@@ -42,8 +43,8 @@ public class PedidoController {
     @PutMapping(path="{prodId}")
     public Pedido updatePedido(@PathVariable("prodId") Long idPedidos,
                                @RequestParam(required = false) String domicilio,
-                               @RequestParam(required = false) String pago,
-                               @RequestParam(required = false) Integer idUsuario) {
-        return pedidoService.updatePedido(idPedidos, domicilio, pago);
+                               @RequestParam(required = false) String forma_de_pago,
+                               @RequestParam(required = false) String status) {
+		return pedidoService.updatePedido(idPedidos, domicilio, forma_de_pago, status);
     }
 }

@@ -1,6 +1,6 @@
 package com.saihon.Spring.service;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,12 +48,13 @@ public class PedidoService {
         }//else
     }//addPedido
 
-    public Pedido updatePedido(Long idPedidos, String domicilio, String pago) {
+    public Pedido updatePedido(Long idPedidos, String domicilio, String forma_de_pago, String status) {
         Pedido tPedido = null;
         if(pedidoRepository.existsById(idPedidos)){
             Pedido pedido = pedidoRepository.findById(idPedidos).get();
             if(domicilio!=null)pedido.setDomicilio(domicilio);
-            if(pago!=null)pago.setPago(pago);  
+            if(forma_de_pago!=null)pedido.setForma_de_pago(forma_de_pago); 
+            if(status!=null)pedido.setStatus(status);  
             pedidoRepository.save(pedido);
             tPedido = pedido;
             }//if
