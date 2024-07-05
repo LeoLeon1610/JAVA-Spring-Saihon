@@ -1,64 +1,64 @@
 package com.saihon.Spring.service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.saihon.Spring.model.Pedido;
+import com.saihon.Spring.repository.PedidoRepository;
 
 @Service
 public class PedidoService {
-    private final ArrayList<Pedido> lista = new ArrayList<>();
+    private final PedidoRepository pedidoRepository;
+    
+    @Autowired
+    public PedidoService(PedidoRepository pedidoRepository) {
+        this.pedidoRepository = pedidoRepository;
+    }//constructor
 
-    public PedidoService() {
-        lista.add(new Pedido("Villa Bilbao #140 San Sebastian", "Tarjeta de debito", 2996));
-        lista.add(new Pedido("Adelitas #690 Valleverde", "Tarjeta de debito", 3467));
-        lista.add(new Pedido("El rosal #2687 Valle de las Flores", "Tarjeta de credito", 610));
-        lista.add(new Pedido("Inglaterra #285 Europa", "Tarjeta de debito", 3471));
-    }
+    public List<Pedido> getAllProducts() {
+        return pedidoRepository.findAll();
+    }//lista de pedidos
 
-    public ArrayList<Pedido> getAllProducts() {
-        return lista;
-    }
+    public Pedido getPedido(Long idPedidos) {
+        return pedidoRepository.findById(idPedidos).orElseThrow(
+        		()-> new IllegalArgumentException("El pedido con el id [" + idPedidos + "[no existe"));
+    }//getPedido
 
-    public Pedido getPedido(int idPedidos) {
-        for (Pedido pedido : lista) {
-            if (pedido.getIdPedidos() == idPedidos) {
-                return pedido;
-            }
-        }
-        return null;
-    }
-
-    public Pedido deletePedido(int idPedidos) {
+    public Pedido deletePedido(Long idPedidos) {
         Pedido tPedido = null;
-        for (Pedido pedido : lista) {
-            if (pedido.getIdPedidos() == idPedidos) {
-                tPedido = lista.remove(lista.indexOf(pedido));
-                break;
-            }
+        if(pedidoRepository.existsById(idPedidos)) {
+        	tPedido = pedidoRepository.findById(idPedidos).get();
+        	pedidoRepository.deleteById(idPedidos);
         }
         return tPedido;
-    }
+    }//deletePedido
 
     public Pedido addPedido(Pedido pedido) {
-        for (Pedido prod : lista) {
-            if (prod.getIdPedidos() == pedido.getIdPedidos()) {
-                return null; // Pedido ya existe
-            }
-        }
-        lista.add(pedido);
-        return pedido;
-    }
+        Optional<Pedido> tPedido =
+        		pedidoRepository.findById(pedido.getIdPedidos());
+        if(tPedido.isEmpty()) {
+        	return pedidoRepository.save(pedido);
+        }else {
+        	System.out.println("El pedido con el nombre [" + pedido.getIdPedidos() +"] ya existe");
+        	return null;
+        }//else
+    }//addPedido
 
-    public Pedido updatePedido(int idPedidos, String domicilio, String pago) {
-        for (Pedido pedido : lista) {
-            if (pedido.getIdPedidos() == idPedidos) {
-                if (domicilio != null) pedido.setDomicilio(domicilio);
-                if (pago != null) pedido.setPago(pago);
-                return pedido;
-            }
-        }
-        return null;
-    }
+    public Pedido updatePedido(Long idPedidos, String domicilio, String pago) {
+        Pedido tPedido = null;
+        if(pedidoRepository.existsById(idPedidos)){
+            Pedido pedido = pedidoRepository.findById(idPedidos).get();
+            if(domicilio!=null)pedido.setDomicilio(domicilio);
+            if(pago!=null)pago.setPago(pago);  
+            pedidoRepository.save(pedido);
+            tPedido = pedido;
+            }//if
+        return tPedido;
+	}
+
 }
+

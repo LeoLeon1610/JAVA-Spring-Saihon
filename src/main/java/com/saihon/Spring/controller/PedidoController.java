@@ -1,6 +1,7 @@
 package com.saihon.Spring.controller;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,30 +17,30 @@ public class PedidoController {
     @Autowired
     public PedidoController(PedidoService pedidoService) {
         this.pedidoService = pedidoService;
-    }
+    }//constructor
 
     @GetMapping
-    public ArrayList<Pedido> getAllProducts() {
+    public List<Pedido> getAllProducts() {
         return pedidoService.getAllProducts();
-    }
+    }//obtener la lista
 
     @GetMapping(path="{prodId}")
-    public Pedido getPedido(@PathVariable("prodId") int idPedidos) {
+    public Pedido getPedido(@PathVariable("prodId") Long idPedidos) {
         return pedidoService.getPedido(idPedidos);
-    }
+    }//getPedido
 
     @DeleteMapping(path="{prodId}")
-    public Pedido deletePedido(@PathVariable("prodId") int idPedidos) {
+    public Pedido deletePedido(@PathVariable("prodId") Long idPedidos) {
         return pedidoService.deletePedido(idPedidos);
-    }
+    }//deletePedido
 
     @PostMapping
     public Pedido addPedido(@RequestBody Pedido pedido) {
         return pedidoService.addPedido(pedido);
-    }
+    }//addPedido
 
     @PutMapping(path="{prodId}")
-    public Pedido updatePedido(@PathVariable("prodId") int idPedidos,
+    public Pedido updatePedido(@PathVariable("prodId") Long idPedidos,
                                @RequestParam(required = false) String domicilio,
                                @RequestParam(required = false) String pago,
                                @RequestParam(required = false) Integer idUsuario) {
