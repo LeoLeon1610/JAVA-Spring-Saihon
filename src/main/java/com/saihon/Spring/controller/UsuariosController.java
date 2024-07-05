@@ -1,6 +1,6 @@
 package com.saihon.Spring.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,17 +27,17 @@ public class UsuariosController {
 	}
 	
 	@GetMapping
-	public ArrayList<Usuario> getUsuarios(){
+	public List<Usuario> getUsuarios(){
 		return userService.getUsers();
 	}//GET Users
 	
 	@GetMapping(path="{userID}")
-	public Usuario getUsuario(@PathVariable("userID") int id) {
+	public Usuario getUsuario(@PathVariable("userID") Long id) {
 		return userService.getUser(id);
 	}//GET User
 	
 	@DeleteMapping(path="{userID}")
-	public Usuario deleteUser(@PathVariable("userID") int id) {
+	public Usuario deleteUser(@PathVariable("userID") Long id) {
 		return userService.removeUser(id);
 	}//DELETE User
 	
@@ -48,7 +48,7 @@ public class UsuariosController {
 	
 	@PutMapping(path="{userID}")
 	public Usuario putUser(@RequestBody ChangePassword changePassword,
-			@PathVariable("userID") int id) {
+			@PathVariable("userID") Long id) {
 		return userService.updateUser(changePassword, id);
 	}//PUT User
 }

@@ -1,23 +1,34 @@
 package com.saihon.Spring.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usuarios")
 public class Usuario {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="usuario_id", unique=true, nullable=false)
+	private Long id;
+	@Column(nullable=false)
 	private String email;
+	@Column(nullable=false)
 	private String nombre;
+	@Column(nullable=false)
 	private String password;
-	private int id;
-	private static int total=0;
+
 
 	public Usuario(String email, String nombre, String password) {
 		this.email = email;
 		this.nombre = nombre;
 		this.password = password;
-		Usuario.total++;
-		this.id = total;
 	}// Constructor
 	
 	public Usuario() {
-		Usuario.total++;
-		this.id=total;
 	}//Constructor Vacío
 
 	public String getEmail() {
@@ -44,7 +55,7 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
