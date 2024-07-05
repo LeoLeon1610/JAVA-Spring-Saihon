@@ -1,50 +1,57 @@
 package com.saihon.Spring.model;
 
-public class LibroPedido {
-    private static int idLibroPedido = 0;
-    private int id;
-    private int idLibro;
-    private int idPedido;
-    
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-    public LibroPedido(int idLibro, int idPedido) {
-        idLibroPedido++;
-        this.id = idLibroPedido;
-        this.idLibro = idLibro;
-        this.idPedido = idPedido;
+@Entity
+@Table(name = "libro_pedido")
+public class LibroPedido {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // @ManyToOne
+    // @JoinColumn(name = "idLibro", referencedColumnName = "id")
+    private Long libro;
+
+    // @ManyToOne
+    // @JoinColumn(name = "idPedido", referencedColumnName = "id")
+    private Long pedido;
+
+    public LibroPedido() {
     }
 
+    public LibroPedido(Long libro, Long pedido) {
+        this.libro = libro;
+        this.pedido = pedido;
+    }
 
     // Getters y Setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public int getIdLibro() {
-        return idLibro;
+    public Long getLibro() {
+        return libro;
     }
 
-    public void setIdLibro(int idLibro) {
-        this.idLibro = idLibro;
+    public void setLibro(Long idLibro) {
+        this.libro = idLibro;
     }
 
-    public int getIdPedido() {
-        return idPedido;
+    public Long getPedido() {
+        return pedido;
     }
 
-    public void setIdPedido(int idPedido) {
-        this.idPedido = idPedido;
+    public void setPedido(Long idPedido) {
+        this.pedido = idPedido;
     }
 
-
-    // Método toString
     @Override
     public String toString() {
-        return "LibroPedido{" +
-                "idLibroPedido=" + idLibroPedido +
-                ", idLibro=" + idLibro +
-                ", idPedido=" + idPedido +
-                '}';
+        return "LibroPedido [id=" + id + ", libro=" + libro + ", pedido=" + pedido + "]";
     }
-
 }
