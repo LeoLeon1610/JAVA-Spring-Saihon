@@ -1,58 +1,55 @@
 package com.saihon.Spring.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.saihon.Spring.model.LibroPedido;
 import com.saihon.Spring.service.LibroPedidoService;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("api/libropedido")
+@RequestMapping("/libroPedido")
 public class LibroPedidoController {
-    private final LibroPedidoService libroPedidoService;
 
-    // Constructor
     @Autowired
-    public LibroPedidoController(LibroPedidoService libroPedidoService) {
-        this.libroPedidoService = libroPedidoService;
-    }
+    private LibroPedidoService libroPedidoService;
 
-    // Métodos
-
-    // Dar la lista de pedidos
     @GetMapping
-    public ArrayList<LibroPedido> getLibroPedido() {
+    public List<LibroPedido> getAllLibroPedido() {
         return libroPedidoService.getAllLibroPedido();
     }
 
-    // Dar la lista de libros pedidos por id
-    @GetMapping(path = "{libroPedidoId}")
-    public LibroPedido getLibroPedidoById(@PathVariable("libroPedidoId") int id) {
-        return libroPedidoService.getLibroPedidoById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<LibroPedido> getLibroPedidoById(@PathVariable int id) {
+        return libroPedidoService.getLibroPedidoById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Eliminar un libro pedido por id
-    @DeleteMapping(path = "{libroPedidoId}")
-    public LibroPedido deleteLibroPedido(@PathVariable("libroPedidoId") int id) {
-        return libroPedidoService.deleteLibroPedido(id);
-    }
-
-    // Crear un libro pedido
     @PostMapping
-    public LibroPedido createLibroPedido(@RequestBody LibroPedido libroPedido) {
-        return libroPedidoService.addLibroPedido(libroPedido);
+    public LibroPedido addLibroPedido(@RequestBody LibroPedido nuevolibroPedido) {
+        return libroPedidoService.addLibroPedido(nuevolibroPedido);
     }
 
-    // Actualizar un libro pedido
-    @PutMapping(path = "{libroPedidoId}")
-    public LibroPedido updateLibroPedido(
-        @PathVariable("libroPedidoId") int id, 
-        @RequestParam(required = false) Integer idLibro, 
-        @RequestParam(required = false) Integer idPedido){
-            
-        return libroPedidoService.updateLibroPedido(id, idLibro, idPedido);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteLibroPedido(@PathVariable int id) {
+        LibroPedido libroPedido = libroPedidoService.deleteLibroPedido(id);
+        if(libroPedido != null) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<LibroPedido> updateLibroPedido(@PathVariable Integer id, @RequestParam(required = false) Integer idLibro, @RequestParam(required = false) Integer idPedido) {
+        LibroPedido libroPedido = libroPedidoService.updateLibroPedido(id, idLibro, idPedido);
+        if(libroPedido != null) {
+            return ResponseEntity.ok(libroPedido);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
 

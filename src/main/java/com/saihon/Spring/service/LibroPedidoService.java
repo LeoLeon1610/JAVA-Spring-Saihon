@@ -1,75 +1,54 @@
 package com.saihon.Spring.service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.saihon.Spring.model.LibroPedido;
+import com.saihon.Spring.repository.LibroPedidoRepository;
 
 @Service
 public class LibroPedidoService {
 
-    public final ArrayList<LibroPedido> table = new ArrayList<LibroPedido>();
+    @Autowired
+    private LibroPedidoRepository libroPedidoRepository;
 
-    public LibroPedidoService(){
-        table.add(new LibroPedido(1, 1));
-        table.add(new LibroPedido(2, 2));
-        table.add(new LibroPedido(3, 3));
+    public List<LibroPedido> getAllLibroPedido() {
+        return libroPedidoRepository.findAll();
     }
 
-    public ArrayList<LibroPedido> getAllLibroPedido() {
-        return table;
-    }
-
-    public LibroPedido getLibroPedidoById(int id) {
-        LibroPedido tmLibroPedido=null;
-        for(LibroPedido libroPedido : table){
-            if(libroPedido.getId() == id){
-                tmLibroPedido = libroPedido;
-                break;
-            }
-        }
-        return tmLibroPedido;
+    public Optional<LibroPedido> getLibroPedidoById(int id) {
+        return libroPedidoRepository.findById((long) id).map(Optional::ofNullable).orElseThrow(() -> new IllegalArgumentException("El producto no existe" + id));
     }
 
     public LibroPedido deleteLibroPedido(int id) {
-        for(LibroPedido libroPedido : table){
-            if(libroPedido.getId() == id){
-                table.remove(libroPedido);
-                return libroPedido;
-            }
+        Optional<LibroPedido> libroPedido = libroPedidoRepository.findById((long) id);
+        if(libroPedido.isPresent()) {
+            libroPedidoRepository.deleteById((long) id);
+            return libroPedido.get();
+        }else {
+            return null;
         }
-        return null;
     }
 
     public LibroPedido addLibroPedido(LibroPedido nuevolibroPedido) {
-            LibroPedido tmpLibroPedido=null;
-            boolean existe=false;
-            for (LibroPedido pedido : table) {
-                if(pedido.getIdPedido() == nuevolibroPedido.getIdPedido()){
-                    existe = true;
-                    break;
-                }
-            }
-            if(!existe) {
-                tmpLibroPedido=nuevolibroPedido;
-                table.add(tmpLibroPedido);
-                return tmpLibroPedido;
-            }
-            return tmpLibroPedido;
+        if (libroPedidoRepository.existsById(nuevolibroPedido.getId())) {
+            return libroPedidoRepository.save(nuevolibroPedido);
+        }else{  
+            return null;
+        }
     }
 
     public LibroPedido updateLibroPedido(Integer id, Integer idLibro, Integer idPedido) {
-            LibroPedido tmpLibroPedido=null;
-            for (LibroPedido libroPedido : table){
-                if(libroPedido.getId() == id){
+        LibroPedido libroPedido = libroPedidoRepository.findById((long) id)
+                .orElseThrow(() -> new IllegalArgumentException("El producto no existe: " + id));
         
-                    if(idLibro != null)libroPedido.setIdLibro(idLibro);
-                    if(idPedido != null)libroPedido.setIdPedido(idPedido);
-                    tmpLibroPedido=libroPedido;
-                    break;
-                }
-            }
-            return tmpLibroPedido;
-        }
+        if (idLibro != null) libroPedido.setLibro((long) idLibro);
+        if (idPedido != null) libroPedido.setPedido((long)idPedido);
+        
+        return libroPedidoRepository.save(libroPedido);
     }
+}
 
