@@ -8,17 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="usuarios")
+@Table(name="usuario")
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="usuario_id", unique=true, nullable=false)
+	@Column(name="idUsuario", unique=true, nullable=false)
 	private Long id;
-	@Column(nullable=false)
+	@Column(name="CorreoElectronico",nullable=false)
 	private String email;
-	@Column(nullable=false)
+	@Column(name="NombreUsuario",nullable=false)
 	private String nombre;
-	@Column(nullable=false)
+	@Column(name="Password",nullable=false)
 	private String password;
 
 
