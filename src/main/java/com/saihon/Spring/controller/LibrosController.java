@@ -54,10 +54,11 @@ public class LibrosController {
 		@RequestParam(required=false) Integer cantidadStock,
 		@RequestParam(required=false) String portada,
 		@RequestParam(required=false) String autor,
+		@RequestParam(required=false) String editorial,
 		@RequestParam(required=false) Integer year,
-		@RequestParam(required=false) String categoria) {
+		@RequestParam(required=false) Integer categoria) {
 		
 		return libroService.updateBook(nombreLibro, precio, descripcion, cantidadStock, portada,
-				autor, year, categoria, idLibros);
+				autor, editorial, year, categoria, idLibros);
 	}//updateLibro
 }//LibrosController
