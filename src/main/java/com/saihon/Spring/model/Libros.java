@@ -27,14 +27,16 @@ public class Libros {
 	private String portada;
 	@Column(name="Autor")
 	private String autor;
+	@Column(name="Editorial")
+	private String editorial;
 	@Column(name="PublicationYear")
 	private Integer year;
 	@Column(name="Categoria_idCategoria",nullable=false)
-	private String categoria;
+	private Integer categoria;
 
 	
 	public Libros(Long idLibros, String nombreLibro, Double precio, String descripcion, Integer cantidadStock,
-			String portada, String autor, Integer year, String categoria) {
+			String portada, String autor, String editorial, Integer year, Integer categoria) {
 		this.idLibros = idLibros;
 		this.nombreLibro = nombreLibro;
 		this.precio = precio;
@@ -42,6 +44,7 @@ public class Libros {
 		this.cantidadStock = cantidadStock;
 		this.portada = portada;
 		this.autor = autor;
+		this.editorial = editorial;
 		this.year = year;
 		this.categoria = categoria;
 	}//Constructor
@@ -107,11 +110,11 @@ public class Libros {
 		this.autor = autor;
 	} //setAutor
 
-	public String getCategoria() {
+	public Integer getCategoria() {
 		return categoria;
 	} //getCategoria
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(Integer categoria) {
 		this.categoria = categoria;
 	} //setCategoria
 	
@@ -119,11 +122,26 @@ public class Libros {
 		return idLibros;
 	} //getId
 
+	
+	public String getEditorial() {
+		return editorial;
+	}
+
+	public void setEditorial(String editorial) {
+		this.editorial = editorial;
+	}
+
+
+	public Long getIdLibros() {
+		return idLibros;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Libros [nombreLibro=" + nombreLibro + ", precio=" + precio + ", descripcion=" + descripcion
-				+ ", cantidadStock=" + cantidadStock + ", portada=" + portada + ", autor=" + autor + ", year=" + year
-				+ ", categoria=" + categoria + ", idLibros=" + idLibros + "]";
+		return "Libros [idLibros=" + idLibros + ", nombreLibro=" + nombreLibro + ", precio=" + precio + ", descripcion="
+				+ descripcion + ", cantidadStock=" + cantidadStock + ", portada=" + portada + ", autor=" + autor
+				+ ", editorial=" + editorial + ", year=" + year + ", categoria=" + categoria + "]";
 	}
 
 
