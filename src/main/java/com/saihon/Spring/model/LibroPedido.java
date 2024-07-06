@@ -7,18 +7,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "libro_pedido")
+@Table(name = "Libropedidos")
 public class LibroPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="idLibrosPedidos", unique=true, nullable=false)
     private Long id;
 
     // @ManyToOne
     // @JoinColumn(name = "idLibro", referencedColumnName = "id")
+    @Column(name="Libros_idLibros",nullable=false)
     private Long libro;
 
     // @ManyToOne
     // @JoinColumn(name = "idPedido", referencedColumnName = "id")
+    @Column(name="Pedidos_idPedidos",nullable=false)
     private Long pedido;
 
     public LibroPedido() {

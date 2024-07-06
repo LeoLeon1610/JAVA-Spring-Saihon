@@ -18,6 +18,7 @@ public class Pedido {
     private String domicilio;
     private String forma_de_pago; 
     private String status;
+	@Column(name="Usuario_idUsuario",nullable = false)
     private long idUsuario;
 
 

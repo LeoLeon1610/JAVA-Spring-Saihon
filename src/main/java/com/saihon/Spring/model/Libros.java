@@ -8,21 +8,28 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Libros")
+@Table(name="libros")
 public class Libros {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", unique=true, nullable=false)
+	@Column(name="idLibros", unique=true, nullable=false)
 	private Long idLibros;
 	
-	@Column(nullable=false)
+	@Column(name="NombreLibro",nullable=false)
 	private String nombreLibro;
+	@Column(name="Precio")
 	private Double precio;
+	@Column(name="Descripcion")
 	private String descripcion;
+	@Column(name="Cantidad_Stock")
 	private Integer cantidadStock;
+	@Column(name="Portada")
 	private String portada;
+	@Column(name="Autor")
 	private String autor;
+	@Column(name="PublicationYear")
 	private Integer year;
+	@Column(name="Categoria_idCategoria",nullable=false)
 	private String categoria;
 
 	
