@@ -1,10 +1,16 @@
 package com.saihon.Spring.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +26,9 @@ public class Usuario {
 	private String nombre;
 	@Column(name="Password",nullable=false)
 	private String password;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="Usuario_idUsuario", referencedColumnName = "idUsuario")
+	List<Pedido> pedidos_por_usuario = new ArrayList<Pedido>();
 
 
 	public Usuario(String email, String nombre, String password) {
@@ -57,6 +66,10 @@ public class Usuario {
 
 	public Long getId() {
 		return id;
+	}
+
+	public List<Pedido> getPedidos_por_usuario() {
+		return pedidos_por_usuario;
 	}
 
 	@Override
