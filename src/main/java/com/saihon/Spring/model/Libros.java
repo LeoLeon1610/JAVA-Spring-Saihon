@@ -35,9 +35,8 @@ public class Libros {
 	private Integer categoria;
 
 	
-	public Libros(Long idLibros, String nombreLibro, Double precio, String descripcion, Integer cantidadStock,
+	public Libros(String nombreLibro, Double precio, String descripcion, Integer cantidadStock,
 			String portada, String autor, String editorial, Integer year, Integer categoria) {
-		this.idLibros = idLibros;
 		this.nombreLibro = nombreLibro;
 		this.precio = precio;
 		this.descripcion = descripcion;
@@ -117,11 +116,6 @@ public class Libros {
 	public void setCategoria(Integer categoria) {
 		this.categoria = categoria;
 	} //setCategoria
-	
-	public Long getId() {
-		return idLibros;
-	} //getId
-
 	
 	public String getEditorial() {
 		return editorial;
