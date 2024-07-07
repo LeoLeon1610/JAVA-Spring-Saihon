@@ -1,10 +1,16 @@
 package com.saihon.Spring.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +39,9 @@ public class Libros {
 	private Integer year;
 	@Column(name="Categoria_idCategoria",nullable=false)
 	private Integer categoria;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name="Libros_idLibros", referencedColumnName = "idLibros")
+	List<LibroPedido> libros_pedidos = new ArrayList<LibroPedido>();
 
 	
 	public Libros(String nombreLibro, Double precio, String descripcion, Integer cantidadStock,
@@ -128,6 +137,10 @@ public class Libros {
 
 	public Long getIdLibros() {
 		return idLibros;
+	}
+
+	public List<LibroPedido> getLibros_pedidos() {
+		return libros_pedidos;
 	}
 
 

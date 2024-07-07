@@ -9,7 +9,7 @@ import com.saihon.Spring.service.LibroPedidoService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/libroPedido")
+@RequestMapping("/api/libroPedido/")
 public class LibroPedidoController {
 
     @Autowired
@@ -20,7 +20,7 @@ public class LibroPedidoController {
         return libroPedidoService.getAllLibroPedido();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<LibroPedido> getLibroPedidoById(@PathVariable int id) {
         return libroPedidoService.getLibroPedidoById(id)
                 .map(ResponseEntity::ok)
@@ -32,7 +32,7 @@ public class LibroPedidoController {
         return libroPedidoService.addLibroPedido(nuevolibroPedido);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteLibroPedido(@PathVariable int id) {
         LibroPedido libroPedido = libroPedidoService.deleteLibroPedido(id);
         if(libroPedido != null) {
@@ -42,7 +42,7 @@ public class LibroPedidoController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<LibroPedido> updateLibroPedido(@PathVariable Integer id, @RequestParam(required = false) Integer idLibro, @RequestParam(required = false) Integer idPedido) {
         LibroPedido libroPedido = libroPedidoService.updateLibroPedido(id, idLibro, idPedido);
         if(libroPedido != null) {
