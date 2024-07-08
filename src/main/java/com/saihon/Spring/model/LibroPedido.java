@@ -10,8 +10,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Libropedidos")
 public class LibroPedido {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idLibrosPedidos", unique=true, nullable=false)
     private Long id;
 
