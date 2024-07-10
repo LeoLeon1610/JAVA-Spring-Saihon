@@ -9,6 +9,5 @@ import com.saihon.Spring.model.Pedido;
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long>{
-	//Optional<Pedido> findById(Long id);
-	
+//	Optional<Pedido> findById(Long id);
 }

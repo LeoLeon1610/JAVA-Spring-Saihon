@@ -48,8 +48,8 @@ public class LibrosService {
         }
     }//addProduct
 
-	public Libros updateBook(String nombreLibro, Double precio, String descripcion, Integer cantidadStock, String portada,
-			String autor, String editorial, Integer year, Integer categoria, Long idLibros) {
+	public Libros updateBook(Long idLibros, String nombreLibro, Double precio, String descripcion, Integer cantidadStock, String portada,
+			String autor, String editorial, Integer year, Integer categoria) {
 		Libros tmpBook = null;
 		if (librosRepository.existsById(idLibros)){
 			Libros libros =librosRepository.findById(idLibros).get();

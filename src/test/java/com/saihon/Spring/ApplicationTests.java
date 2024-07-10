@@ -44,7 +44,7 @@ class ApplicationTests {
 	@Autowired
 	private PasswordEncoder encoder;
 	
-	private final String token = "Bearer: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmR5bWlsbGxlckBob3RtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzIwNDY4NTU5LCJleHAiOjE3MjA1MDQ1NTl9.Bs1eOOzrArOipo0Nb4nb4W_0m2PTKuxJNvzQcxR3HNM";
+	private final String token = "Bearer: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqY0BnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTcyMDY0NzY2NywiZXhwIjoxNzIwNjgzNjY2fQ.x_Ds8N2lX8yRAbeo9Q2FnK0lHJiPFnLbrknpCx-PpJY";
 //********pruebas Pedidos******	
 	@Test
 	@DisplayName("Se prueba el GET del endpoint http://localhost:8080/api/pedidos/1")
@@ -100,8 +100,8 @@ class ApplicationTests {
 	 } // asJsonString
 
 	@Test
-	@DisplayName("Se prueba el PUT, modificar un producto, el 1")
-	@Disabled("Probando metodo PUT PEdidos")
+	@DisplayName("Se prueba el PUT, modificar un pedido, el 1")
+	//@Disabled("Probando metodo PUT Pedidos")
 	void pruebaPUT() throws Exception{
 		this.mockMvc.perform( put("/api/pedidos/1")
 				.queryParam("status", "finalizado")
@@ -165,10 +165,10 @@ class ApplicationTests {
 	
 	@Test
 	@DisplayName("Se prueba modificar un producto con id 1")
-	@Disabled("Metoso PUT Libros")
+	//@Disabled("Metoso PUT Libros")
 	void pruebaPUTLibros() throws Exception {
-		this.mockMvc.perform(put("/api/libros/1")
-				.queryParam("precio", "350.20")
+		this.mockMvc.perform(put("/api/libros/2")
+				.queryParam("precio", "350.2")
 				.header("Authorization", token))
 		.andDo(print())
 		.andExpect(status().isOk())

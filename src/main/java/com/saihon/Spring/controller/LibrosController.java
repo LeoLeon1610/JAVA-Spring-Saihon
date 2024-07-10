@@ -58,7 +58,7 @@ public class LibrosController {
 		@RequestParam(required=false) Integer year,
 		@RequestParam(required=false) Integer categoria) {
 		
-		return libroService.updateBook(nombreLibro, precio, descripcion, cantidadStock, portada,
-				autor, editorial, year, categoria, idLibros);
+		return libroService.updateBook(idLibros, nombreLibro, precio, descripcion, cantidadStock, portada,
+				autor, editorial, year, categoria);
 	}//updateLibro
 }//LibrosController

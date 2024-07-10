@@ -13,15 +13,15 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idPedidos", unique = true, nullable = false)
-	 private long idPedidos;
+	 private Long idPedidos;
 	@Column(nullable = false)
     private String domicilio;
     private String forma_de_pago; 
     private String status;
 	@Column(name="Usuario_idUsuario",nullable = false)
-    private long idUsuario;
+    private Long idUsuario;
 
-    public Pedido(String domicilio, String forma_de_pago, String status, long idUsuario) {
+    public Pedido(String domicilio, String forma_de_pago, String status, Long idUsuario) {
 		this.domicilio = domicilio;
 		this.forma_de_pago = forma_de_pago;
 		this.status = status;
