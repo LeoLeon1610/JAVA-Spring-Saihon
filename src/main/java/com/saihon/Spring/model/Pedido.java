@@ -21,9 +21,7 @@ public class Pedido {
 	@Column(name="Usuario_idUsuario",nullable = false)
     private long idUsuario;
 
-
-    public Pedido(long idPedidos, String domicilio, String forma_de_pago, String status, long idUsuario) {
-		this.idPedidos = idPedidos;
+    public Pedido(String domicilio, String forma_de_pago, String status, long idUsuario) {
 		this.domicilio = domicilio;
 		this.forma_de_pago = forma_de_pago;
 		this.status = status;

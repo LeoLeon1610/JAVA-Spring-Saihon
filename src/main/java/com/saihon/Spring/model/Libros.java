@@ -33,7 +33,6 @@ public class Libros {
 	private Integer year;
 	@Column(name="Categoria_idCategoria",nullable=false)
 	private Integer categoria;
-
 	
 	public Libros(String nombreLibro, Double precio, String descripcion, Integer cantidadStock,
 			String portada, String autor, String editorial, Integer year, Integer categoria) {
@@ -129,7 +128,6 @@ public class Libros {
 	public Long getIdLibros() {
 		return idLibros;
 	}
-
 
 	@Override
 	public String toString() {
