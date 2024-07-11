@@ -4,6 +4,7 @@ package com.saihon.Spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.saihon.Spring.model.Categoria;
 import com.saihon.Spring.service.CategoriaService;
-
+@CrossOrigin(origins = "http://127.0.0.1:5502/")
 @RestController
 @RequestMapping(path="/api/categorias/")
 public class CategoriaController {

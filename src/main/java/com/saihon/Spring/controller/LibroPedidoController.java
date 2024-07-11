@@ -7,7 +7,7 @@ import com.saihon.Spring.model.LibroPedido;
 import com.saihon.Spring.service.LibroPedidoService;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://127.0.0.1:5502/")
 @RestController
 @RequestMapping(path="/api/libroPedido/")
 public class LibroPedidoController {
