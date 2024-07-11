@@ -12,8 +12,8 @@ import javax.persistence.Table;
 public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idPedidos", unique = true, nullable = false)
-	 private Long idPedidos;
+	@Column(unique = true, nullable = false)
+	 private long idPedidos;
 	@Column(nullable = false)
     private String domicilio;
     private String forma_de_pago; 
@@ -46,7 +46,7 @@ public class Pedido {
         return idPedidos;
     }//getIdPedidos
 
-    public long getIdUsuario() {
+    public Long getIdUsuario() {
         return idUsuario;
     }//getIdUusario
 

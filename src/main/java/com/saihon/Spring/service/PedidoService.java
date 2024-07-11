@@ -12,14 +12,14 @@ import com.saihon.Spring.repository.PedidoRepository;
 
 @Service
 public class PedidoService {
-    private final PedidoRepository pedidoRepository;
-    
-    @Autowired
+	public final PedidoRepository pedidoRepository;
+	
+	@Autowired
     public PedidoService(PedidoRepository pedidoRepository) {
-        this.pedidoRepository = pedidoRepository;
-    }//constructor
+		this.pedidoRepository = pedidoRepository;
+	}
 
-    public List<Pedido> getAllProducts() {
+	public List<Pedido> getAllProducts() {
         return pedidoRepository.findAll();
     }//lista de pedidos
 
@@ -37,16 +37,28 @@ public class PedidoService {
         return tPedido;
     }//deletePedido
 
+//    public Pedido addPedido(Pedido pedido) {
+//        Optional<Pedido> tmpLibro = pedidoRepository.findById(pedido.getIdPedidos());   
+//        if(tmpLibro.isEmpty()) {
+//        	return pedidoRepository.save(pedido);
+//        } else {
+//        	System.out.println("El pedido con el id [" +
+//        			pedido.getIdPedidos() + "] ya existe");
+//        	return null;
+//        }
+//    }//addPedido
+    
     public Pedido addPedido(Pedido pedido) {
-        Optional<Pedido> tPedido =
-        		pedidoRepository.findById(pedido.getIdPedidos());
-        if(tPedido.isEmpty()) {
-        	return pedidoRepository.save(pedido);
-        }else {
-        	System.out.println("El pedido con el nombre [" + pedido.getIdPedidos() +"] ya existe");
-        	return null;
-        }//else
-    }//addPedido
+    	Optional<Pedido> tmpPedido = pedidoRepository.findById(pedido.getIdPedidos());
+    	if(tmpPedido.isEmpty()) {
+    		return pedidoRepository.save(pedido);
+    	}
+    	else {
+    		System.out.println("El producto con el id ["
+					+ pedido.getIdPedidos() + "] ya existe");
+    		return null;
+    	}
+    }
 
     public Pedido updatePedido(Long idPedidos, String domicilio, String forma_de_pago, String status) {
         Pedido tPedido = null;
